@@ -1,0 +1,11 @@
+#!/usr/bin/python3
+
+from sys import argv as args
+
+try:
+   import clipboard
+except ImportError:
+   print("please, install the package python3-pip or python-pip(on arch-linux)\nafter run \"sudo pip3 install clipboard\"")
+   print("\nafter this doed, run this script again.")
+
+print(clipboard.paste().strip(), end='')

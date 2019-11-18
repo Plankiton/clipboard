@@ -1,21 +1,41 @@
 #!/usr/bin/python3
-from sys import argv as args
+from sys import stderr, exit, argv as args
 
-if 'paste' in args or 'p' in args or 'P' in args or 'v' in args or 'V' in args:
-    try:
-       import clipboard
-    except ImportError:
-       print("please, install the package python3-pip or python-pip(on arch-linux)\nafter run \"sudo pip3 install clipboard\"")
+try:
+    import clipboard
+except ImportError:
+    print("ERROR: please, install the \"clipboard\" library to continue.")
+    exit(1)
+
+if '-h' in args or '--help' in args:
+    print('''
+Usage: clip [-h] [paste|copy]
+
+A ultility for copy and paste using the terminal.
+
+-h, --help      Show this message and exit
+v, paste        Show the text from clipboard
+c, copy         Copy the text from pipe ("|")
+                to clipboard (is the default).
+
+Example:
+
+echo "this text will be copied."| clip
+echo $(clip paste)
+'''.strip())
+    exit(0)
+
+for arg in args[1:]:
+    if arg not in ['v', 'paste', 'c', 'copy']:
+        print('Usage: clip [-h] [paste|copy]')
+        print('Clip: the "{}" arg is not valid!', file=stderr)
+        exit(1)
+
+if 'paste' in args or 'p' in args:
        print("\nafter this doed, run this script again.")
 
     print(clipboard.paste().strip(), end='')
 else:
-    try:
-       import clipboard
-    except ImportError:
-       print("please, install the package python3-pip or python-pip(on arch-linux)\nafter run \"sudo pip3 install clipboard\"")
-       print("\nafter this doed, run this script again.")
-
     def read():
         from sys import stdin
         return stdin.read()

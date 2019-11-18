@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from sys import stderr, exit, argv as args
+from sys import stdin, stderr, exit, argv as args
 
 try:
     import clipboard
@@ -9,19 +9,18 @@ except ImportError:
 
 if '-h' in args or '--help' in args:
     print('''
-Usage: clip [-h] [paste|copy]
+Usage: clip TEXT [-h] [paste]
 
 A ultility for copy and paste using the terminal.
 
 -h, --help      Show this message and exit
 v, paste        Show the text from clipboard
-c, copy         Copy the text from pipe ("|")
-                to clipboard (is the default).
 
 Example:
 
 echo "this text will be copied."| clip
-echo $(clip paste)
+clip "this text will be copied."
+clip paste | grep 'text'
 '''.strip())
     exit(0)
 
@@ -32,17 +31,15 @@ for arg in args[1:]:
         exit(1)
 
 if 'paste' in args or 'p' in args:
-       print("\nafter this doed, run this script again.")
-
     print(clipboard.paste().strip(), end='')
 else:
     def read():
-        from sys import stdin
         return stdin.read()
 
-    if len(args)>2:
-       clipboard.copy(' '.join(args[2:]))
-       print("the text \"{}\" was copied!".format(' '.join(args[2:])))
+    if len(args) > 2:
+        clipboard.copy(' '.join(args[2:]))
+        print(' '.join(args[2:]), end='')
     else:
-       clipboard.copy(read())
-       print("the text was copied")
+        text = read()
+        clipboard.copy(text.strip())
+        print(text, end='')

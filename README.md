@@ -1,38 +1,22 @@
-# Clipboard tools
+# Clip Ultil
 
-Copy and paste from clipboard of the system in your terminal.
+A ultility for copy and paste using the terminal.
 
-## Copy
-
-### With arguments
+Copying text:
 
 ```sh
-ctrlC "Thing to copy"
-
-ctrlC 'Thing to copy'
-
-ctrlC Thing to copy
+$ echo "this text will be copied."| clip
+this text will be copied.
 ```
 
-### With pipe (`|`)
-
 ```sh
-echo "
-Thing
-to
-copy" | ctrlC
-
-whois google.com | ctrlC
-
-cat txt.txt| grep name | ctrlC
+$ clip "this text will be copied."
+this text will be copied.
 ```
 
-## Paste
+Pasting text:
 
 ```sh
-ctrlV
-
-echo "\"$(ctrlV)\" did pasted!"
-
-ctrlV | grep VAR=
+$ clip paste
+this text did paste.
 ```

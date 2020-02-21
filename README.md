@@ -20,3 +20,15 @@ Pasting text:
 $ clip paste
 this text did paste.
 ```
+
+For more informations type `clip -h` on terminal
+
+## Installing
+
+Run the nexts commands on a terminal:
+
+```sh
+$ [[ -e "$HOME/.local/bin" ]] || mkdir -p "$HOME/.local/bin" && wget -c "https://raw.githubusercontent.com/RoboCopGay/clipboard/master/clip" && chmod +x clip && mv clip "$HOME/.local/bin/"
+```
+
+Verify if `$HOME/.local/bin` are on `$PATH` environment variable.

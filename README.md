@@ -29,7 +29,7 @@ First run this command to add the requirements of project:
 > You need of `pip` on your computer for install the requeriments
 
 ```sh
-$ wget -O- https://raw.githubusercontent.com/RoboCopGay/clipboard/master/requirements.txt | xargs pip install --user
+$ wget -O- https://raw.githubusercontent.com/RoboCopGay/clipboard/master/requirements.txt | xargs pip --user install
 ```
 
 After is just run this command to install the clip:
